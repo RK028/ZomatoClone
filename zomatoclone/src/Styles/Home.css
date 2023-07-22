@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+.img{
+    width: 100%;
+    height:500px;
+    background: fixed;
+    background-size: cover;
+
+}
+.logo{
+    width:105px;
+    height:109px;
+    text-align: center;
+    top: 22%;
+    margin-left: 43%;
+    position: absolute;
+    border: 1px solid #707070;
+    background-color: #fff;
+    border-radius: 50%;
+    font-family: popins;
+    font-size: 70px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height:95px;
+    letter-spacing: normal;
+    color:red;
+}
+
+.heading{
+    color: white;
+    text-align:center;
+    font-size: 10px;
+    font-weight: normal;
+    position: relative;
+    margin:auto;
+    font-size: 36px;
+    top:-240px;
+}
+
+.locationDropdown{
+    height: 40px;
+    width: 245px;
+    color: gray;
+    border: none;
+    border-radius: 0px;
+    font-size: 15px;
+    opacity: 0.7;
+    margin-right: 21px;
+    margin-bottom: 25px;
+    float: left;
+    padding-left: 30px;
+}
+.restaurantsinput{
+    height: 40px;
+    width: 310px;
+    color: gray;
+    border: none;
+    border-radius: 0px;
+    font-size: 15px;
+    opacity: 0.7;
+    float: left;
+    padding-left: 37px;
+}
+
+.locationSelector{
+    position: relative;
+    top:-238px;
+    margin-left:32.5%;
+    margin-right: 20%;
+    text-align: center;
+}
+
+.search{
+    position: absolute !important;
+    left: 275px;
+    margin: 2% 0px;
+}
+.quicksearch{
+    position: absolute;
+    margin-left: 15px;
+    margin-top: -35px;
+}
+
+.quicksearchHeading{
+    text-align: left;
+    color: #192f60;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding-left: 35px;
+}
+.quicksearchSubHeading{
+    text-align: left;
+    color: gray;
+    font-size: 18px;
+    font-weight: normal;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding-left: 35px;
+}
+.tileContainer{
+    height: 150px;
+    width: 350px;
+    background-color: white;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    margin-left: 20px;
+    box-shadow: 0 3px 6px gray;
+    flex-direction: row;
+    display: flex;
+}
+.tilecomponent2{
+    position: relative;
+    left: 6px;
+    margin: 2% 0px;
+}
+.componentHeading{
+    text-align: left;
+    color: #010409;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-decoration: none;
+}
+.componentSubHeading{
+    text-align: left;
+    color: rgb(60, 58, 58);
+    font-size: 15px;
+    font-weight: normal;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
+}
+.ResSel{
+    height: 40px;
+    width: 309px;
+    color: #b90a0a;
+    border: none;
+    border-radius: 0px;
+    font-size: 15px;
+    opacity: 0.7;
+    margin-right: 21px;
+    margin-bottom: 25px;
+    float: left;
+    padding-left: 30px;
+    background: white;
+    border: 1px solid black;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
