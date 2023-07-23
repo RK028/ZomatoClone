@@ -23,9 +23,7 @@ const mongoSanitize = require("express-mongo-sanitize")
 app.use(mongoSanitize())
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.get("/restaurants",(req,res)=>{
-    res.send(restaurants);
-});
+
 
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -35,30 +33,75 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get("/restaurants/:location_id",(req,res)=>{
-    var location_id = req.params.location_id;
-    console.log(location_id);
-    var response = [];
-    for (let i = 0; i < restaurants.length; i++) {
-        const resData = restaurants[i];
-        console.log(resData,"resData");
-        if (resData.location_id == location_id) {
-            response.push(resData)
-        }
-    }
-    res.send(response);
-});
-app.get("/restaurants",(req,res)=>{
-  res.send(restaurants)
-})
+// app.get("/restaurants/:location_id",(req,res)=>{
+//     var location_id = req.params.location_id;
+//     console.log(location_id);
+//     var response = [];
+//     for (let i = 0; i < restaurants.length; i++) {
+//         const resData = restaurants[i];
+//         console.log(resData,"resData");
+//         if (resData.location_id == location_id) {
+//             response.push(resData)
+//         }
+//     }
+//     res.send(response);
+// });
+// app.get("/restaurants",(req,res)=>{
+//   res.send(restaurants)
+// })
 app.get("/locations",(req,res)=>{
     res.send(locationsdata);
 });
-
+app.get("/restaurants",(req,res)=>{
+  res.send(restaurants);
+});
 app.get("/mealtypes",(req,res)=>{
     res.send(MealTypedata);
 });
+app.post("/filter",(req,res)=>{
+  try {
+    console.log(req.body)
+    var response;
+    if(Object.keys(req.body).indexOf("mealtype") == 0){
+      function checkMealtype(item) {
+        if(req.body.location){
+          console.log("hi")
+          return item.mealtype_id == req.body.mealtype && item.location_id == Number(req.body.location);
+        } 
+        else {
+          console.log("bye")
+          if(req.body.hcost && req.body.lcost){
+            return item.mealtype_id == req.body.mealtype && item.min_price >= req.body.lcost && item.min_price <= req.body.hcost ;
+          }
+          if(req.body.cusisine ){
+            return (req.body.cusisine).filter((cusisine)=>{
+              return (item.cuisine).filter((rescus)=>{
+               return (rescus.id) == (cusisine)
+              })
+            });
+          }
+          return item.mealtype_id == req.body.mealtype ;
+        }
 
+       
+      }
+      response = restaurants.filter(checkMealtype)
+      if(req.body.sort == 1){
+        response = response.sort((a, b) => parseFloat(a.min_price) - parseFloat(b.min_price))
+      }
+      else if(req.body.sort == -1){
+        response = response.sort((a, b) => parseFloat(b.min_price) - parseFloat(a.min_price))
+      }
+    }else{
+      response = {"status":false}
+    }
+    
+    res.json(response);
+  } catch (error) {
+    console.log(error,"err")
+  }
+
+});
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //   next(createError(404));

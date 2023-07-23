@@ -26,14 +26,14 @@ class Filter extends React.Component{
             mealtype : Number(mealtype),   
          }
 
-         axios({method: 'GET',
-         url:'http://127.0.0.1:8900/restaurants',
+         axios({method: 'POST',
+         url:'http://localhost:8900/filter',
          headers:{'content-Type': 'application/json'},
          data :filterObj
          })
          .then(response =>{
-            console.log(response);
-         this.setState({restaurants :response.data.restaurants,mealtype})
+            console.log(response,"ressss");
+         this.setState({restaurants :response.data,mealtype})
         })
         .catch(err => console.log(err));
 
@@ -66,7 +66,7 @@ class Filter extends React.Component{
          data :filterObj
          })
          .then(response =>{
-         this.setState({restaurants :response.data.restaurants,location})
+         this.setState({restaurants :response.data,location})
         })
         .catch(err => console.log(err));
     }
@@ -95,7 +95,7 @@ class Filter extends React.Component{
          data :filterObj
          })
          .then(response =>{
-         this.setState({restaurants :response.data.restaurants,cusisine ,pageCount:response.data.pageCount})
+         this.setState({restaurants :response.data,cusisine})
         })
         .catch(err => console.log(err));
     }
@@ -116,7 +116,7 @@ class Filter extends React.Component{
         data :filterObj
         })
         .then(response =>{
-        this.setState({restaurants :response.data.restaurants,sort,page})
+        this.setState({restaurants :response.data,sort,page})
        })
        .catch(err => console.log(err));
     }
@@ -137,7 +137,7 @@ class Filter extends React.Component{
         data :filterObj
         })
         .then(response =>{
-        this.setState({restaurants :response.data.restaurants,lcost,hcost})
+        this.setState({restaurants :response.data,lcost,hcost})
        })
        .catch(err => console.log(err));
     }
@@ -158,7 +158,7 @@ class Filter extends React.Component{
         data :filterObj
         })
         .then(response =>{
-        this.setState({restaurants :response.data.restaurants,page})
+        this.setState({restaurants :response.data,page})
        })
        .catch(err => console.log(err));
     }
@@ -182,23 +182,23 @@ class Filter extends React.Component{
                             })}
                             </select>
                             <div className="filterPanelSubHeading">Cuisine</div>
-                            <input type="checkbox" className="cuisinOption" onChange={this.handleCuisineChange}/>
+                            <input type="checkbox" className="cuisinOption" onClick={()=>this.handleCuisineChange(1)}/>
                                 <label>North Indian</label>
                         
                             <br/>
-                            <input type="checkbox" className="cuisinOption" onChange={this.handleCuisineChange}/>
+                            <input type="checkbox" className="cuisinOption" onClick={()=>this.handleCuisineChange(2)}/>
                                 <label>South Indian</label>
                         
                             <br/>
-                            <input type="checkbox" className="cuisinOption" onChange={this.handleCuisineChange}/>
+                            <input type="checkbox" className="cuisinOption" onClick={()=>this.handleCuisineChange(3)}/>
                                 <label>Chinese</label>
                         
                             <br/>
-                            <input type="checkbox" className="cuisinOption" onChange={this.handleCuisineChange}/>
+                            <input type="checkbox" className="cuisinOption" onClick={()=>this.handleCuisineChange(4)}/>
                                 <label>Fast Food</label>
                         
                             <br/>
-                            <input type="checkbox" className="cuisinOption" onChange={this.handleCuisineChange}/>
+                            <input type="checkbox" className="cuisinOption" onClick={()=>this.handleCuisineChange(5)}/>
                                 <label>Street Food</label>
                         
                             <br/>
@@ -237,9 +237,9 @@ class Filter extends React.Component{
                     </div>
                     
                      <div className="col-9 col-sm-12 col-md-8 col-lg-9">
-                     {restaurants.length >0 ? restaurants.map(item =>{
-                        console.log(restaurants);
-                        <div className="resultsPannel">
+                     {restaurants.length > 0 ? restaurants.map(item =>{
+                       return (<div className="resultsPannel">
+                            <p>{item.name}</p>
                         <div className="row upperSection">
                             <div className="col-2">
                                 <img src={`./${item.image}`} className="resultsImage"/>
@@ -261,7 +261,7 @@ class Filter extends React.Component{
                                 <div className="resultSubHeading">&#8377;{item.min_price}</div>
                             </div>
                         </div>
-                     </div> 
+                     </div>) 
                      }) : <div style={{color:'red',fontSize:'35px',fontWeight:'bold',textAlign:'center',fontFamily:'cursive'}}><h2>No Result Found...</h2></div>}
                       
                       {restaurants.length > 0 ?
